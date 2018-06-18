@@ -1,4 +1,4 @@
-# ROSBagLab vectorized messages 
+# rosbaglab vectorized messages 
 
 In rosbaglab all messages are vectorized, this makes ploting and processing topic data very easy.
 
