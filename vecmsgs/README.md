@@ -31,7 +31,7 @@ In order to make the automatic plot of topics possible some functions where stan
 ## Adding your custom message
 
 In order to add your custom message you need to:
-* Add the respective class in the (_custom_msgs.py)[_custom_msgs.py] file.
-* Add the message type and correspondent class in the (_msgs.py)[_msgs.py] file.
+* Add the respective class in the [_custom_msgs.py](_custom_msgs.py) file.
+* Add the message type and correspondent class in the [_msgs.py](_msgs.py) file.
 
 If you have any questions fell free to open an issue.
