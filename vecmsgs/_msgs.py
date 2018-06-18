@@ -81,5 +81,4 @@ def get_message_obj(type, messages):
             'sensor_msgs/TimeReference': _sensor_msgs.VecTimeReference(messages),
             # _custom_msgs
             'some_msgs/CustomMsgs': _custom_msgs.VecCustomMsg(messages),
-            'scobotros_temp/pwm_values': _custom_msgs.VecPwmValues(messages),
             }.get(type, None)
