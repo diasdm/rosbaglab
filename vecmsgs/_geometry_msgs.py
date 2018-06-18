@@ -6,6 +6,7 @@
 #THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import numpy as np
+from geometry_msgs.msg import PoseWithCovarianceStamped
 
 from _bag_msg import *
 from _std_msgs import *
@@ -353,6 +354,16 @@ class VecPoseWithCovarianceStamped(VecBagMsg):
         VecBagMsg.write_message(self, t, count)
         self.header.write_message(msg.header, t, count)
         self.pose.write_message(msg.pose, t, count)
+
+    def write_rosbag_msg(self, msg, msg_idx):
+        self.header.write_rosbag_msg(msg.header, msg_idx)
+        self.pose.write_rosbag_msg(msg.pose, msg_idx)
+        
+    def get_rosbag_msg(self, msg_idx):
+        msg = PoseWithCovarianceStamped()
+        self.write_rosbag_msg(msg, msg_idx)
+        t = VecBagMsg.get_rosbag_msg(self, msg_idx)
+        return [msg, t]
 
 class VecQuaternion(VecBagMsg):
     def __init__(self, messages, bagmsg_length = True):
