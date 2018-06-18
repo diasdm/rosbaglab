@@ -125,20 +125,17 @@ def merge_bags_by_reference(bags_objs):
     return bag_obj
 
 def get_closest_time(bag_obj, topics_list, mintime, next_msg_to_retrieve):
-    # assuming there aren't 2 equal times
-    topic_idx = 0
-    
+    # assuming there aren't 2 equal times   
     dtime = np.zeros(len(bag_obj.topics_list), dtype=np.float64)
     
-    for topic in topics_list:
+    for topic_idx, topic in enumerate(topics_list):
         if next_msg_to_retrieve[topic_idx] < topic.messages:
             dtime[topic_idx] = topic.obj.bagtime.ft[next_msg_to_retrieve[topic_idx]] - mintime
         else:
             dtime[topic_idx] = np.inf
-        topic_idx += 1
     
     idx = np.argmin(dtime)
-    mintime = topic.obj.bagtime.ft[next_msg_to_retrieve[idx]]
+    mintime = topics_list[idx].obj.bagtime.ft[next_msg_to_retrieve[idx]]
     return [mintime, idx]
 
 def get_rosbag_msg(topics_list, idx, msg_idx):
