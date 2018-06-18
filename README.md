@@ -2,7 +2,7 @@
 
 This is a Python library written with the intent to automatize ROS Bags plotting, specially plots of variables with physical meaning, e.g. distances, velocities, orientations, etc. Yet, it is also possible to edit, save and create ROS Bags.
 
-ROSBagLab vectorizes a ROS Bag, meaning that (almost) every field of a ROS topic is in the same array. This allows easy processing of topic data, e.g. to calculate orientation errors.
+rosbaglab vectorizes a ROS Bag, meaning that (almost) every field of a ROS topic is in the same array. This allows easy processing of topic data, e.g. to calculate orientation errors.
 
 ## Features
 * Plot ROS Bags, even data from different topics can be plotted in the same graph if they have the same physical meaning, e.g. position from Odometry and PoseWithCovarianceStamped. 
