@@ -1,4 +1,4 @@
-# ROSBagLab
+# rosbaglab
 
 This is a Python library written with the intent to automatize ROS Bags plotting, specially plots of variables with physical meaning, e.g. distances, velocities, orientations, etc. Yet, it is also possible to edit, save and create ROS Bags.
 
