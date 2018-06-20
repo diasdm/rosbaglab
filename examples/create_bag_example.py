@@ -33,6 +33,9 @@ if __name__ == '__main__':
     # Save position to topic
     topic_obj.obj.set_position_x(position_x)
     topic_obj.obj.set_position_y(position_y)
+    # Add child_frame_id
+    for i in range(messages):
+        topic_obj.obj.child_frame_id.append('child_frame_id')
     # Plot the bag topic
     bag_obj.plot_all_topics()
     # Save the bag_obj
