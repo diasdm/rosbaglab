@@ -31,6 +31,9 @@ class TopicList(list):
         
     def plot_position_time_y(self):
         topic_plots.plot_position_time_y([0], self, range(len(self)))
+
+    def plot_position_time_z(self):
+        topic_plots.plot_position_time_z([0], self, range(len(self)))
     
     def plot_position_x_y(self):
         topic_plots.plot_position_x_y([0], self, range(len(self)))
