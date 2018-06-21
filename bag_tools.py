@@ -140,7 +140,12 @@ def get_closest_time(bag_obj, topics_list, mintime, next_msg_to_retrieve):
 
 def get_rosbag_msg(topics_list, idx, msg_idx):
     topic = topics_list[idx].topic
-    [msg, t] = topics_list[idx].obj.get_rosbag_msg(msg_idx)
+    try:
+        [msg, t] = topics_list[idx].obj.get_rosbag_msg(msg_idx)
+    except TypeError:
+        msg = None
+        t = None
+        print('Topic type ' + topics_list[idx].obj.__class__.__name__ + ' does not have a get_ros_msg function!')
     return [topic, msg, t]
 
 def save_bag(bag_obj, save_path):
@@ -156,7 +161,8 @@ def save_bag(bag_obj, save_path):
         while totalmsgs > 0:
             [mintime, idx] = get_closest_time(bag_obj, bag_obj.topics_list, mintime, next_msg_to_retrieve)
             [topic, msg, t] = get_rosbag_msg(bag_obj.topics_list, idx, next_msg_to_retrieve[idx])
-            output_bag.write(topic, msg, t)
+            if msg != None:
+                output_bag.write(topic, msg, t)
             next_msg_to_retrieve[idx] += 1
             totalmsgs -= 1
     return
