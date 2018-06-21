@@ -16,7 +16,7 @@ class VecBuiltInType(VecBagMsg):
         else:
             VecBagMsg.__init__(self, 0)
         self.data = np.zeros(messages, dtype=numpy_type)
-        
+
     def write_message(self, msg, t, count):
         VecBagMsg.write_message(self, t, count)
         self.data[count] = msg
@@ -44,7 +44,7 @@ class VecColorRGBA(VecBagMsg):
         self.g = np.zeros(messages, dtype=np.float32)
         self.b = np.zeros(messages, dtype=np.float32)
         self.a = np.zeros(messages, dtype=np.float32)
-        
+
     def write_message(self, msg, t, count):
         VecBagMsg.write_message(self, t, count)
         self.r = msg.r
@@ -62,7 +62,7 @@ class VecDuration(VecBagMsg):
         self.nsecs = np.zeros(messages, dtype=np.int32)
         # time as float
         self.ft = np.zeros(messages, dtype=np.float64())
-        
+
     def write_message(self, msg, t, count):
         VecBagMsg.write_message(self, t, count)
         self.secs[count] = msg.secs
@@ -75,7 +75,7 @@ class VecEmpty(VecBagMsg):
             VecBagMsg.__init__(self, messages)
         else:
             VecBagMsg.__init__(self, 0)
-        
+
     def write_message(self, msg, t, count):
         return
 
@@ -94,13 +94,13 @@ class VecHeader(VecBagMsg):
         self.seq[count] = msg.seq
         self.stamp.write_message(msg.stamp, t, count)
         self.frame_id = msg.frame_id
-            
+
     def get_time(self):
         return self.stamp.get_time()
-    
+
     def set_time(self, ft):
         return self.stamp.set_time(ft)
-    
+
     def write_ros_msg(self, msg, msg_idx):
         self.stamp.write_ros_msg(msg.stamp, msg_idx)
         msg.frame_id = self.frame_id
@@ -112,7 +112,7 @@ class VecString(VecBagMsg):
         else:
             VecBagMsg.__init__(self, 0)
         self.data = []
-        
+
     def write_message(self, msg, t, count):
         VecBagMsg.write_message(self, t, count)
         self.data.append(msg)
@@ -127,21 +127,21 @@ class VecTime(VecBagMsg):
         self.nsecs = np.zeros(messages, dtype=np.uint32)
         # time as float
         self.ft = np.zeros(messages, dtype=np.float64())
-        
+
     def write_message(self, msg, t, count):
         VecBagMsg.write_message(self, t, count)
         self.secs[count] = msg.secs
         self.nsecs[count] = msg.nsecs
         self.ft[count] = np.float64(msg.secs + np.float64(msg.nsecs) * 10**(-9))
-    
+
     def get_time(self):
         return self.ft
-    
+
     def set_time(self, ft):
         self.secs = np.array(np.trunc(ft), dtype=np.uint32)
         self.nsecs = np.array((ft - self.secs) * 10**9, np.uint32)
         self.ft = ft
-    
+
     def write_ros_msg(self, msg, msg_idx):
         msg.secs = int(self.secs[msg_idx])
         msg.nsecs = int(self.nsecs[msg_idx])

@@ -22,23 +22,23 @@ class VecCustomMsg(VecBagMsg):
         self.child_frame_id = []
         self.pose = VecPoseWithCovariance(messages, False)
         self.twist = VecTwistWithCovariance(messages, False)
-    
+
     def write_message(self, msg, t, count):
         VecBagMsg.write_message(self, t, count)
         self.header.write_message(msg.header, t, count)
         self.child_frame_id.append(msg.child_frame_id)
         self.pose.write_message(msg.pose, t, count)
         self.twist.write_message(msg.twist, t, count)
-        
+
     def get_position_x(self):
         return self.pose.get_position_x()
-    
+
     def get_position_y(self):
         return self.pose.get_position_y()
 
     def get_quat(self):
         return self.pose.get_quat()
-    
+
     def get_time(self):
         return self.header.get_time()
 
@@ -86,7 +86,7 @@ class VecPwmValues(VecBagMsg):
         self.err_int = VecBuiltInTypeArray(3, messages, np.float64, False)
         self.time_Step = VecBuiltInType(messages, np.float64, False)
         self.quat_error = VecBuiltInTypeArray(3, messages, np.float64, False)
-    
+
     def write_message(self, msg, t, count):
         VecBagMsg.write_message(self, t, count)
         self.header.write_message(msg.header, t, count)
@@ -107,27 +107,27 @@ class VecPwmValues(VecBagMsg):
         self.err_int.write_message(msg.err_int, t, count)
         self.time_Step.write_message(msg.Time_Step, t, count)
         self.quat_error.write_message(msg.Quat_error, t, count)
-        
+
     def get_forces(self):
         return self.force
-    
+
     def get_desired_rpy0(self):
         return self.desired_rpy.data[0]
-    
+
     def get_desired_rpy1(self):
         return self.desired_rpy.data[1]
-    
+
     def get_desired_rpy2(self):
         return self.desired_rpy.data[2]
-    
+
     def get_current_rpy0(self):
         return self.current_rpy.data[0]
-    
+
     def get_current_rpy1(self):
         return self.current_rpy.data[1]
-    
+
     def get_current_rpy2(self):
         return self.current_rpy.data[2]
-    
+
     def get_time(self):
         return self.header.get_time()

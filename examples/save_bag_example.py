@@ -10,5 +10,5 @@ if __name__ == '__main__':
     bag_to_load = 'texas_willow_hallway_loop_indexed.bag'
     # Loads a bag
     bag_obj = bag_tools.load_bag(bag_to_load)
-    # Saves bag under a different name 
+    # Saves bag under a different name
     bag_tools.save_bag(bag_obj, 'someNewName.bag')

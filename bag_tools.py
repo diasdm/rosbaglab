@@ -21,10 +21,10 @@ class Bag:
         self.diff_topic_idx = []
         self.diff_topic_types = []
         self.topics_list = topic_tools.TopicList()
-        
+
     def __str__(self):
         return 'Bag ' + self.path + ' contains ' + str(len(self.topics_list)) + ' topics from ' + str(self.diff_topic_num) + ' different types.'
-        
+
     def add_topic(self, topic, i):
         type_idx = 0
         # if the topic type is in the bag properties
@@ -36,7 +36,7 @@ class Bag:
                 return
             else:
                 type_idx += 1
-        
+
         # if the topic type is not in the bag properties
         self.diff_topic_types.append(topic.type)
         self.topics_list.append(topic)
@@ -44,10 +44,10 @@ class Bag:
         self.topic_name_list.append(topic.topic)
         self.diff_topic_idx[self.diff_topic_num].append(i)
         self.diff_topic_num += 1
-        
+
     def get_topics(self, topic_names):
         out_list = []
-        
+
         if isinstance(topic_names, list):
             for topic_name in topic_names:
                 try:
@@ -61,14 +61,14 @@ class Bag:
                 i = self.topic_name_list.index(topic_names)
             except ValueError:
                 print(topic_names + ' is not in the topics_list')
-                return 
+                return
             out_list.append(self.topics_list[i])
-            
+
         return out_list
-    
+
     def plot_all_topics(self):
         topic_plots.plot_topics_list(self.topics_list)
-    
+
 def obj_list_write_message(topic, msg, t, topic_list):
     for i in range(len(topic_list)):
         if topic == topic_list[i].topic:
@@ -78,14 +78,14 @@ def obj_list_write_message(topic, msg, t, topic_list):
             topic_list[i].obj.write_message(msg, t, count)
             topic_list[i].count += 1
             break
-    
+
 def load_bag(bag_to_load):
     input_dict = yaml.load(rosbag.Bag(bag_to_load, 'r')._get_yaml_info())
-    
+
     bag_obj = Bag(bag_to_load)
-    
+
     freq = -1.0
-    
+
     for i in range(len(input_dict['topics'])):
         # Since there are topics that don't have a frequency field
         if 'frequency' in input_dict['topics'][i]:
@@ -93,25 +93,25 @@ def load_bag(bag_to_load):
         else:
             freq = -1.0
 
-        topic = topic_tools.Topic( freq, input_dict['topics'][i]['messages'], 
+        topic = topic_tools.Topic( freq, input_dict['topics'][i]['messages'],
                           input_dict['topics'][i]['topic'], input_dict['topics'][i]['type'])
         if topic.obj is None:
             print('Message object not found for message of type ' + topic.type + ' , skipping topic ' + topic.topic)
         else:
             bag_obj.add_topic(topic, i)
-    
+
     for topic, msg, t in rosbag.Bag(bag_to_load).read_messages():
         obj_list_write_message(topic, msg, t, bag_obj.topics_list)
-    
+
     return bag_obj
 
 def load_multiple_bags(bags_to_load):
     bags_objs = []
-    
+
     for bag_to_load in bags_to_load:
         bag_obj = load_bag(bag_to_load)
         bags_objs.append(bag_obj)
-        
+
     return bags_objs
 
 def merge_bags_by_reference(bags_objs):
@@ -121,19 +121,19 @@ def merge_bags_by_reference(bags_objs):
         for topic in obj.topics_list:
             bag_obj.add_topic(topic, i)
             i += 1
-    
+
     return bag_obj
 
 def get_closest_time(bag_obj, topics_list, mintime, next_msg_to_retrieve):
-    # assuming there aren't 2 equal times   
+    # assuming there aren't 2 equal times
     dtime = np.zeros(len(bag_obj.topics_list), dtype=np.float64)
-    
+
     for topic_idx, topic in enumerate(topics_list):
         if next_msg_to_retrieve[topic_idx] < topic.messages:
             dtime[topic_idx] = topic.obj.bagtime.ft[next_msg_to_retrieve[topic_idx]] - mintime
         else:
             dtime[topic_idx] = np.inf
-    
+
     idx = np.argmin(dtime)
     mintime = topics_list[idx].obj.bagtime.ft[next_msg_to_retrieve[idx]]
     return [mintime, idx]
@@ -150,12 +150,12 @@ def get_ros_msg(topics_list, idx, msg_idx):
 
 def save_bag(bag_obj, save_path):
     totalmsgs = 0
-    
+
     for topic in bag_obj.topics_list:
         totalmsgs += topic.messages
-        
+
     next_msg_to_retrieve = np.zeros(len(bag_obj.topics_list), dtype=np.uint32)
-        
+
     with rosbag.Bag(save_path, 'w') as output_bag:
         mintime = -1
         while totalmsgs > 0:

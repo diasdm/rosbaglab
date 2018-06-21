@@ -21,43 +21,43 @@ class Topic:
         self.type = type
         self.count = 0
         self.obj = _msgs.get_message_obj(type, messages)
-        
+
     def __str__(self):
         return 'Topic ' + self.topic + ' is of type ' + self.type + ' and contains ' + self.messages + ' messages.'
-    
+
 class TopicList(list):
     def plot_position_time_x(self):
         topic_plots.plot_position_time_x([0], self, range(len(self)))
-        
+
     def plot_position_time_y(self):
         topic_plots.plot_position_time_y([0], self, range(len(self)))
 
     def plot_position_time_z(self):
         topic_plots.plot_position_time_z([0], self, range(len(self)))
-    
+
     def plot_position_x_y(self):
         topic_plots.plot_position_x_y([0], self, range(len(self)))
-     
+
     def plot_position(self):
         topic_plots.plot_position([0], self, range(len(self)))
-        
-    def plot_orientation_roll(self):    
+
+    def plot_orientation_roll(self):
         topic_plots.plot_orientation_roll([0], self, range(len(self)))
-        
-    def plot_orientation_pitch(self):    
+
+    def plot_orientation_pitch(self):
         topic_plots.plot_orientation_pitch([0], self, range(len(self)))
-        
-    def plot_orientation_yaw(self):    
+
+    def plot_orientation_yaw(self):
         topic_plots.plot_orientation_yaw([0], self, range(len(self)))
-        
-    def plot_orientation(self):    
+
+    def plot_orientation(self):
         topic_plots.plot_orientation([0], self, range(len(self)))
-    
+
     def append(self, item):
         if not isinstance(item, Topic):
             raise TypeError, 'item is not of type %s' % Topic.type
         super(TopicList, self).append(item)
-    
+
     def print_topics_names(self):
         print('This list contains:')
         for topic in self:

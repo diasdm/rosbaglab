@@ -14,7 +14,7 @@ import _sensor_msgs
 import _custom_msgs
 
 def get_message_obj(type, messages):
-        return { 
+        return {
             # _std_msgs http://wiki.ros.org/std_msgs
             'std_msgs/Bool': _std_msgs.VecBuiltInType(messages, np.uint8),
             'std_msgs/Byte': _std_msgs.VecBuiltInType(messages, np.uint8),

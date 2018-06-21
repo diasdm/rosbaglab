@@ -8,9 +8,9 @@ from context import bag_tools
 
 if __name__ == '__main__':
     bag_obj = bag_tools.Bag()
-    
+
     # For those how what to write their own bags
-    
+
     # Make an odometry spiral example
     # Topic properties
     messages = 1000 # Message number

@@ -19,21 +19,21 @@ class VecBagMsg:
     def __init__(self, messages = 0):
         self.messages = messages
         self.bagtime = VecBagTime(messages)
-        
+
     def write_message(self, t, count):
-        if self.messages != 0: 
+        if self.messages != 0:
             self.bagtime.secs[count] = t.secs
             self.bagtime.nsecs[count] = t.nsecs
             self.bagtime.ft[count] = np.float64(t.secs + np.float64(t.nsecs) * 10**(-9))
-    
+
     def get_time(self):
         return self.bagtime.ft
-    
+
     def set_bag_time(self, ft):
         self.bagtime.secs = np.array(np.trunc(ft), dtype=np.uint32)
         self.bagtime.nsecs = np.array((ft - self.bagtime.secs) * 10**9, np.uint32)
         self.bagtime.ft = ft
-    
+
     def get_ros_msg(self, msg_idx):
         t = Time()
         t.secs = int(self.bagtime.secs[msg_idx])
