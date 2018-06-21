@@ -293,6 +293,9 @@ class VecPoseStamped(VecBagMsg):
     def get_quat(self):
         return self.pose.get_quat()
     
+    def set_quat(self, quat):
+        return self.pose.set_quat(quat)
+    
     def get_time(self):
         return self.header.get_time()
     
