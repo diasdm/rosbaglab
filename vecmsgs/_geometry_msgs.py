@@ -142,7 +142,7 @@ class VecPoint(VecBagMsg):
     def set_point_z(self, point_z):
         self.z = point_z
     
-    def write_rosbag_msg(self, msg, msg_idx):
+    def write_ros_msg(self, msg, msg_idx):
         msg.x = self.x[msg_idx]
         msg.y = self.y[msg_idx]
         msg.z = self.z[msg_idx]
@@ -181,7 +181,7 @@ class VecPoint32(VecBagMsg):
     def set_point_z(self, point_z):
         self.z = point_z
     
-    def write_rosbag_msg(self, msg, msg_idx):
+    def write_ros_msg(self, msg, msg_idx):
         msg.x = self.x[msg_idx]
         msg.y = self.y[msg_idx]
         msg.z = self.z[msg_idx]
@@ -238,9 +238,9 @@ class VecPose(VecBagMsg):
     def set_quat(self, quat):
         return self.orientation.set_quat(quat)
     
-    def write_rosbag_msg(self, msg, msg_idx):
-        self.position.write_rosbag_msg(msg.position, msg_idx)
-        self.orientation.write_rosbag_msg(msg.orientation, msg_idx)
+    def write_ros_msg(self, msg, msg_idx):
+        self.position.write_ros_msg(msg.position, msg_idx)
+        self.orientation.write_ros_msg(msg.orientation, msg_idx)
         
 class VecPose2D(VecBagMsg):
     def __init__(self, messages, bagmsg_length = True):
@@ -349,8 +349,8 @@ class VecPoseWithCovariance(VecBagMsg):
     def set_quat(self, quat):
         return self.pose.set_quat(quat)
     
-    def write_rosbag_msg(self, msg, msg_idx):
-        self.pose.write_rosbag_msg(msg.pose, msg_idx)
+    def write_ros_msg(self, msg, msg_idx):
+        self.pose.write_ros_msg(msg.pose, msg_idx)
         msg.covariance = self.covariance[:, msg_idx].tolist()
 
 class VecPoseWithCovarianceStamped(VecBagMsg):
@@ -367,14 +367,14 @@ class VecPoseWithCovarianceStamped(VecBagMsg):
         self.header.write_message(msg.header, t, count)
         self.pose.write_message(msg.pose, t, count)
 
-    def write_rosbag_msg(self, msg, msg_idx):
-        self.header.write_rosbag_msg(msg.header, msg_idx)
-        self.pose.write_rosbag_msg(msg.pose, msg_idx)
+    def write_ros_msg(self, msg, msg_idx):
+        self.header.write_ros_msg(msg.header, msg_idx)
+        self.pose.write_ros_msg(msg.pose, msg_idx)
         
-    def get_rosbag_msg(self, msg_idx):
+    def get_ros_msg(self, msg_idx):
         msg = PoseWithCovarianceStamped()
-        self.write_rosbag_msg(msg, msg_idx)
-        t = VecBagMsg.get_rosbag_msg(self, msg_idx)
+        self.write_ros_msg(msg, msg_idx)
+        t = VecBagMsg.get_ros_msg(self, msg_idx)
         return [msg, t]
 
 class VecQuaternion(VecBagMsg):
@@ -395,7 +395,7 @@ class VecQuaternion(VecBagMsg):
     def set_quat(self, quat):
         self.quat = quat
         
-    def write_rosbag_msg(self, msg, msg_idx):
+    def write_ros_msg(self, msg, msg_idx):
         msg.x = self.quat[0, msg_idx]
         msg.y = self.quat[1, msg_idx]
         msg.z = self.quat[2, msg_idx]
@@ -459,9 +459,9 @@ class VecTwist(VecBagMsg):
         self.linear.write_message(msg.linear, t, count)
         self.angular.write_message(msg.angular, t, count)
         
-    def write_rosbag_msg(self, msg, msg_idx):
-        self.linear.write_rosbag_msg(msg.linear, msg_idx)
-        self.angular.write_rosbag_msg(msg.angular, msg_idx)
+    def write_ros_msg(self, msg, msg_idx):
+        self.linear.write_ros_msg(msg.linear, msg_idx)
+        self.angular.write_ros_msg(msg.angular, msg_idx)
 
 class VecTwistStamped(VecBagMsg):
     def __init__(self, messages, bagmsg_length = True):
@@ -491,8 +491,8 @@ class VecTwistWithCovariance(VecBagMsg):
         self.twist.write_message(msg.twist, t, count)
         self.covariance[:, count] = msg.covariance
         
-    def write_rosbag_msg(self, msg, msg_idx):
-        self.twist.write_rosbag_msg(msg.twist, msg_idx)
+    def write_ros_msg(self, msg, msg_idx):
+        self.twist.write_ros_msg(msg.twist, msg_idx)
         msg.covariance = self.covariance[:, msg_idx].tolist()
         
 class VecTwistWithCovarianceStamped(VecBagMsg):
@@ -534,7 +534,7 @@ class VecVector3(VecBagMsg):
     def get_z(self):
         return self.z
     
-    def write_rosbag_msg(self, msg, msg_idx):
+    def write_ros_msg(self, msg, msg_idx):
         msg.x = self.x[msg_idx]
         msg.y = self.y[msg_idx]
         msg.z = self.z[msg_idx]

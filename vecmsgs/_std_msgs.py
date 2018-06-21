@@ -101,8 +101,8 @@ class VecHeader(VecBagMsg):
     def set_time(self, ft):
         return self.stamp.set_time(ft)
     
-    def write_rosbag_msg(self, msg, msg_idx):
-        self.stamp.write_rosbag_msg(msg.stamp, msg_idx)
+    def write_ros_msg(self, msg, msg_idx):
+        self.stamp.write_ros_msg(msg.stamp, msg_idx)
         msg.frame_id = self.frame_id
 
 class VecString(VecBagMsg):
@@ -142,6 +142,6 @@ class VecTime(VecBagMsg):
         self.nsecs = np.array((ft - self.secs) * 10**9, np.uint32)
         self.ft = ft
     
-    def write_rosbag_msg(self, msg, msg_idx):
+    def write_ros_msg(self, msg, msg_idx):
         msg.secs = int(self.secs[msg_idx])
         msg.nsecs = int(self.nsecs[msg_idx])

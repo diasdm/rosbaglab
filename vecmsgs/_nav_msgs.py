@@ -81,17 +81,17 @@ class VecOdometry(VecBagMsg):
     def set_time(self, ft):
         return self.header.set_time(ft)
     
-    def get_rosbag_msg(self, msg_idx):
+    def get_ros_msg(self, msg_idx):
         msg = Odometry()
-        self.write_rosbag_msg(msg, msg_idx)
-        t = VecBagMsg.get_rosbag_msg(self, msg_idx)
+        self.write_ros_msg(msg, msg_idx)
+        t = VecBagMsg.get_ros_msg(self, msg_idx)
         return [msg, t]
         
-    def write_rosbag_msg(self, msg, msg_idx):
-        self.header.write_rosbag_msg(msg.header, msg_idx)
+    def write_ros_msg(self, msg, msg_idx):
+        self.header.write_ros_msg(msg.header, msg_idx)
         msg.child_frame_id = self.child_frame_id[msg_idx]
-        self.pose.write_rosbag_msg(msg.pose, msg_idx)
-        self.twist.write_rosbag_msg(msg.twist, msg_idx)
+        self.pose.write_ros_msg(msg.pose, msg_idx)
+        self.twist.write_ros_msg(msg.twist, msg_idx)
         
     def get_roll(self):
         q = self.get_quat()

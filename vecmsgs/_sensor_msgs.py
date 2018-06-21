@@ -94,19 +94,19 @@ class VecImu(VecBagMsg):
     def get_linear_acceleration_z(self):
         return self.linear_acceleration.get_z()
     
-    def get_rosbag_msg(self, msg_idx):
+    def get_ros_msg(self, msg_idx):
         msg = Imu()
-        self.write_rosbag_msg(msg, msg_idx)
-        t = VecBagMsg.get_rosbag_msg(self, msg_idx)
+        self.write_ros_msg(msg, msg_idx)
+        t = VecBagMsg.get_ros_msg(self, msg_idx)
         return [msg, t]
         
-    def write_rosbag_msg(self, msg, msg_idx):
-        self.header.write_rosbag_msg(msg.header, msg_idx)
-        self.orientation.write_rosbag_msg(msg.orientation, msg_idx)
+    def write_ros_msg(self, msg, msg_idx):
+        self.header.write_ros_msg(msg.header, msg_idx)
+        self.orientation.write_ros_msg(msg.orientation, msg_idx)
         msg.orientation_covariance = self.orientation_covariance[msg_idx,:]
-        self.angular_velocity.write_rosbag_msg(msg.angular_velocity, msg_idx)
+        self.angular_velocity.write_ros_msg(msg.angular_velocity, msg_idx)
         msg.angular_velocity_covariance = self.angular_velocity_covariance[msg_idx,:]
-        self.linear_acceleration.write_rosbag_msg(msg.linear_acceleration, msg_idx)
+        self.linear_acceleration.write_ros_msg(msg.linear_acceleration, msg_idx)
         msg.linear_acceleration_covariance = self.linear_acceleration_covariance[msg_idx,:]
         
     def get_roll(self):

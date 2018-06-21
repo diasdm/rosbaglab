@@ -34,7 +34,7 @@ class VecBagMsg:
         self.bagtime.nsecs = np.array((ft - self.bagtime.secs) * 10**9, np.uint32)
         self.bagtime.ft = ft
     
-    def get_rosbag_msg(self, msg_idx):
+    def get_ros_msg(self, msg_idx):
         t = Time()
         t.secs = int(self.bagtime.secs[msg_idx])
         t.nsecs = int(self.bagtime.nsecs[msg_idx])
