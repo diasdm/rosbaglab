@@ -281,6 +281,15 @@ class VecPoseStamped(VecBagMsg):
     def get_position_z(self):
         return self.pose.get_position_z()
     
+    def set_position_x(self, position_x):
+        return self.pose.set_position_x(position_x)
+    
+    def set_position_y(self, position_y):
+        return self.pose.set_position_y(position_y)
+    
+    def set_position_z(self, position_z):
+        return self.pose.set_position_z(position_z)
+    
     def get_quat(self):
         return self.pose.get_quat()
     
