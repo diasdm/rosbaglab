@@ -233,6 +233,12 @@ class VecNavSatFix(VecBagMsg):
         t = VecBagMsg.get_ros_msg(self, msg_idx)
         return [msg, t]
 
+    def get_latitude(self):
+        return self.latitude.get_data()
+
+    def get_longitude(self):
+        return self.longitude.get_data()
+
 class VecNavSatStatus(VecBagMsg):
     def __init__(self, messages, bagmsg_length = True):
         if bagmsg_length:

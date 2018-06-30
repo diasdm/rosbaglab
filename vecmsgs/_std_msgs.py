@@ -21,6 +21,9 @@ class VecBuiltInType(VecBagMsg):
         VecBagMsg.write_message(self, t, count)
         self.data[count] = msg
 
+    def get_data(self):
+        return self.data
+
 class VecBuiltInTypeArray(VecBagMsg):
     def __init__(self, array_len, messages, numpy_type, bagmsg_length = True):
         if bagmsg_length:

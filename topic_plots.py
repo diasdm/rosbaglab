@@ -98,6 +98,15 @@ def plot_imu(plot_num, topic_list, topic_idx_list):
     plot_linear_acceleration(plot_num, topic_list, topic_idx_list)
     plot_angular_velocity(plot_num, topic_list, topic_idx_list)
 
+def plot_latitude_time(plot_num, topic_list, topic_idx_list):
+    plot_position_time_ysmth(plot_num, topic_list, topic_idx_list, 'Latitude over time', 'Latitude [deg]', ['get_latitude'])
+
+def plot_longitude_time(plot_num, topic_list, topic_idx_list):
+    plot_position_time_ysmth(plot_num, topic_list, topic_idx_list, 'Longitude over time', 'Longitude [deg]', ['get_longitude'])
+
+def plot_gps_coordinates(plot_num, topic_list, topic_idx_list):
+    plot_position_xsmth_multiysmth(plot_num, topic_list, topic_idx_list, 'GPS coordinates', 'Latitude [deg]', 'get_latitude', 'Longitude [deg]', ['get_longitude'], True)
+
 def plot_topics_list(topics_list):
     plot_num = [0]
 
