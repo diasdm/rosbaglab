@@ -52,13 +52,13 @@ def plot_position_time_multiysmth(plot_num, topic_list, topic_idx_list, title, y
     plot_position_xsmth_multiysmth(plot_num, topic_list, topic_idx_list, title, 'Time [secs]', 'get_time', ylabel, yfunc, False, ylegends)
 
 def plot_position_time_x(plot_num, topic_list, topic_idx_list):
-    plot_position_time_ysmth(plot_num, topic_list, topic_idx_list, 'X position over time', 'X postion [m]', ['get_position_x'])
+    plot_position_time_ysmth(plot_num, topic_list, topic_idx_list, 'X position over time', 'X position [m]', ['get_position_x'])
 
 def plot_position_time_y(plot_num, topic_list, topic_idx_list):
-    plot_position_time_ysmth(plot_num, topic_list, topic_idx_list, 'Y position over time', 'Y postion [m]', ['get_position_y'])
+    plot_position_time_ysmth(plot_num, topic_list, topic_idx_list, 'Y position over time', 'Y position [m]', ['get_position_y'])
 
 def plot_position_time_z(plot_num, topic_list, topic_idx_list):
-    plot_position_time_ysmth(plot_num, topic_list, topic_idx_list, 'Z position over time', 'Z postion [m]', ['get_position_z'])
+    plot_position_time_ysmth(plot_num, topic_list, topic_idx_list, 'Z position over time', 'Z position [m]', ['get_position_z'])
 
 def plot_orientation_roll(plot_num, topic_list, topic_idx_list):
     plot_position_time_ysmth(plot_num, topic_list, topic_idx_list, 'Roll rotation over time', 'Roll rotation [deg]', ['get_roll'])
