@@ -8,7 +8,7 @@ All vectorized messages extend the same base class, VecBagMsg. This class contai
 
 ## Standard message functions
 
-In order to make the automatic plot of topics possible some functions where standardized. There are some obvious functions messing such as the ones for linear velocity, this is simply because they wheren't needed so far.
+In order to make the automatic plot of topics possible some functions where standardized. There are some obvious functions missing such as the ones for linear velocity, this is simply because they wheren't needed so far.
 
 #### Time
 * `get_time(self)`
@@ -34,4 +34,4 @@ In order to add your custom message you need to:
 * Add the respective class in the [_custom_msgs.py](_custom_msgs.py) file.
 * Add the message type and correspondent class in the [_msgs.py](_msgs.py) file.
 
-If you have any questions fell free to open an issue.
+If you have any questions feel free to open an issue.
