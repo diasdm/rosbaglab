@@ -35,9 +35,9 @@ class VecMapMetaData(VecBagMsg):
 
     def write_ros_msg(self, msg, msg_idx):
         self.map_load_time.write_ros_msg(msg.map_load_time, msg_idx)
-        self.resolution.write_ros_msg(msg.resolution, msg_idx)
-        self.width.write_ros_msg(msg.width, msg_idx)
-        self.height.write_ros_msg(msg.height, msg_idx)
+        msg.resolution = self.resolution[msg_idx]
+        msg.width = self.width[msg_idx]
+        msg.height = self.height[msg_idx]
         self.origin.write_ros_msg(msg.origin, msg_idx)
 
     def get_ros_msg(self, msg_idx):

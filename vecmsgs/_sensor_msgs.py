@@ -32,8 +32,8 @@ class VecFluidPressure(VecBagMsg):
 
     def write_ros_msg(self, msg, msg_idx):
         self.header.write_ros_msg(msg.header, msg_idx)
-        self.fluid_pressure.write_ros_msg(msg.fluid_pressure, msg_idx)
-        self.variance.write_ros_msg(msg.variance, msg_idx)
+        msg.fluid_pressure = self.fluid_pressure[msg_idx]
+        msg.variance = self.variance[msg_idx]
 
     def get_ros_msg(self, msg_idx):
         msg = sensor_msgs.msg.FluidPressure()
@@ -59,8 +59,8 @@ class VecIlluminance(VecBagMsg):
 
     def write_ros_msg(self, msg, msg_idx):
         self.header.write_ros_msg(msg.header, msg_idx)
-        self.illuminance.write_ros_msg(msg.illuminance, msg_idx)
-        self.variance.write_ros_msg(msg.variance, msg_idx)
+        msg.illuminance = self.illuminance[msg_idx]
+        msg.variance = self.variance[msg_idx]
 
     def get_ros_msg(self, msg_idx):
         msg = sensor_msgs.msg.Illuminance()
@@ -160,9 +160,9 @@ class VecJoyFeedback(VecBagMsg):
         self.intensity.write_message(msg.intensity, t, count)
 
     def write_ros_msg(self, msg, msg_idx):
-        self.type.write_ros_msg(msg.type, msg_idx)
-        self.id.write_ros_msg(msg.id, msg_idx)
-        self.intensity.write_ros_msg(msg.intensity, msg_idx)
+        msg.type = self.type[msg_idx]
+        msg.id = self.id[msg_idx]
+        msg.intensity = self.intensity[msg_idx]
 
     def get_ros_msg(self, msg_idx):
         msg = sensor_msgs.msg.JoyFeedback()
@@ -222,10 +222,10 @@ class VecNavSatFix(VecBagMsg):
     def write_ros_msg(self, msg, msg_idx):
         self.header.write_ros_msg(msg.header, msg_idx)
         self.status.write_ros_msg(msg.status, msg_idx)
-        self.latitude.write_ros_msg(msg.latitude, msg_idx)
-        self.longitude.write_ros_msg(msg.longitude, msg_idx)
-        msg.position_covariance = self.position_covariance[:, msg_idx]
-        self.position_covariance_type.write_ros_msg(msg.position_covariance_type, msg_idx)
+        msg.latitude = self.latitude.data[msg_idx]
+        msg.longitude = self.longitude.data[msg_idx]
+        msg.position_covariance = self.position_covariance[:, msg_idx].tolist()
+        msg.position_covariance_type = self.position_covariance_type[msg_idx]
 
     def get_ros_msg(self, msg_idx):
         msg = sensor_msgs.msg.NavSatFix()
@@ -254,8 +254,8 @@ class VecNavSatStatus(VecBagMsg):
         self.service.write_message(msg.service, t, count)
 
     def write_ros_msg(self, msg, msg_idx):
-        self.status.write_ros_msg(msg.status, msg_idx)
-        self.service.write_ros_msg(msg.service, msg_idx)
+        msg.status = self.status[msg_idx]
+        msg.service = self.service[msg_idx]
 
     def get_ros_msg(self, msg_idx):
         msg = sensor_msgs.msg.NavSatStatus()
@@ -283,9 +283,9 @@ class VecPointField(VecBagMsg):
 
     def write_ros_msg(self, msg, msg_idx):
         msg.name = self.name[msg_idx]
-        self.offset.write_ros_msg(msg.offset, msg_idx)
-        self.datatype.write_ros_msg(msg.datatype, msg_idx)
-        self.count.write_ros_msg(msg.count, msg_idx)
+        msg.offset = self.offset[msg_idx]
+        msg.datatype = self.datatype[msg_idx]
+        msg.count = self.count[msg_idx]
 
     def get_ros_msg(self, msg_idx):
         msg = sensor_msgs.msg.PointField()
@@ -317,11 +317,11 @@ class VecRange(VecBagMsg):
 
     def write_ros_msg(self, msg, msg_idx):
         self.header.write_ros_msg(msg.header, msg_idx)
-        self.radiation_type.write_ros_msg(msg.radiation_type, msg_idx)
-        self.field_of_view.write_ros_msg(msg.field_of_view, msg_idx)
-        self.min_range.write_ros_msg(msg.min_range, msg_idx)
-        self.max_range.write_ros_msg(msg.max_range, msg_idx)
-        self.range.write_ros_msg(msg.range, msg_idx)
+        msg.radiation_type = self.radiation_type[msg_idx]
+        msg.field_of_view = self.field_of_view[msg_idx]
+        msg.min_range = self.min_range[msg_idx]
+        msg.max_range = self.max_range[msg_idx]
+        msg.range = self.range[msg_idx]
 
     def get_ros_msg(self, msg_idx):
         msg = sensor_msgs.msg.Range()
@@ -350,11 +350,11 @@ class VecRegionOfInterest(VecBagMsg):
         self.do_rectify.write_message
 
     def write_ros_msg(self, msg, msg_idx):
-        self.x_offset.write_ros_msg(msg.x_offset, msg_idx)
-        self.y_offset.write_ros_msg(msg.y_offset, msg_idx)
-        self.height.write_ros_msg(msg.height, msg_idx)
-        self.width.write_ros_msg(msg.width, msg_idx)
-        self.do_rectify.write_ros_msg(msg.do_rectify, msg_idx)
+        msg.x_offset = self.x_offset[msg_idx]
+        msg.y_offset = self.y_offset[msg_idx]
+        msg.height = self.height[msg_idx]
+        msg.width = self.width[msg_idx]
+        msg.do_rectify = self.do_rectify[msg_idx]
 
     def get_ros_msg(self, msg_idx):
         msg = sensor_msgs.msg.RegionOfInterest()
@@ -380,8 +380,8 @@ class VecRelativeHumidity(VecBagMsg):
 
     def write_ros_msg(self, msg, msg_idx):
         self.header.write_ros_msg(msg.header, msg_idx)
-        self.relative_humidity.write_ros_msg(msg.relative_humidity, msg_idx)
-        self.variance.write_ros_msg(msg.variance, msg_idx)
+        msg.relative_humidity = self.relative_humidity[msg_idx]
+        msg.variance = self.variance[msg_idx]
 
     def get_ros_msg(self, msg_idx):
         msg = sensor_msgs.msg.RelativeHumidity()
@@ -407,8 +407,8 @@ class VecTemperature(VecBagMsg):
 
     def write_ros_msg(self, msg, msg_idx):
         self.header.write_ros_msg(msg.header, msg_idx)
-        self.temperature.write_ros_msg(msg.temperature, msg_idx)
-        self.variance.write_ros_msg(msg.variance, msg_idx)
+        msg.temperature = self.temperature[msg_idx]
+        msg.variance = self.variance[msg_idx]
 
     def get_ros_msg(self, msg_idx):
         msg = sensor_msgs.msg.Temperature()

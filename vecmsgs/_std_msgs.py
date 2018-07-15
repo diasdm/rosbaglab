@@ -21,6 +21,10 @@ class VecBuiltInType(VecBagMsg):
         VecBagMsg.write_message(self, t, count)
         self.data[count] = msg
 
+    # This class can not have a write_ros_msg function
+    # since it deals low level data
+    # def write_ros_msg(self, msg, msg_idx):
+
     def get_data(self):
         return self.data
 
@@ -36,6 +40,13 @@ class VecBuiltInTypeArray(VecBagMsg):
     def write_message(self, msg, t, count):
         VecBagMsg.write_message(self, t, count)
         self.data[:,count] = msg
+
+    # This class can not have a write_ros_msg function
+    # since it deals low level data
+    # def write_ros_msg(self, msg, msg_idx):
+
+    def get_data(self):
+        return self.data
 
 class VecColorRGBA(VecBagMsg):
     def __init__(self, messages, bagmsg_length = True):

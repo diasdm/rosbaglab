@@ -39,4 +39,4 @@ if __name__ == '__main__':
     # Plot the bag topic
     bag_obj.plot_all_topics()
     # Save the bag_obj
-    bag_tools.save_bag(bag_obj, '/home/david/projects/atrvjr_catkin/bags/mocap_2imu/bag_2018-05-01-16-08-43-atrvjr-xpto.bag')
+    bag_tools.save_bag(bag_obj, 'someNewBag.bag')
