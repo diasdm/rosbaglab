@@ -19,7 +19,10 @@ class VecBuiltInType(VecBagMsg):
 
     def write_message(self, msg, t, count):
         VecBagMsg.write_message(self, t, count)
-        self.data[count] = msg
+        try:
+            self.data[count] = msg
+        except TypeError:
+            self.data[count] = msg.data
 
     # This class can not have a write_ros_msg function
     # since it deals low level data

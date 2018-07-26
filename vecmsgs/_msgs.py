@@ -16,7 +16,7 @@ import _custom_msgs
 def get_message_obj(type, messages):
         return {
             # _std_msgs http://wiki.ros.org/std_msgs
-            'std_msgs/Bool': _std_msgs.VecBuiltInType(messages, np.uint8),
+            'std_msgs/Bool': _std_msgs.VecBuiltInType(messages, np.bool_),
             'std_msgs/Byte': _std_msgs.VecBuiltInType(messages, np.uint8),
             'std_msgs/Char': _std_msgs.VecBuiltInType(messages, np.uint8),
             'std_msgs/ColorRGBA': _std_msgs.VecColorRGBA(messages),
