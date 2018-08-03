@@ -46,25 +46,25 @@ class Bag:
         self.diff_topic_num += 1
 
     def get_topics(self, topic_names):
-        out_list = []
 
         if isinstance(topic_names, list):
+            out = []
             for topic_name in topic_names:
                 try:
                     i = self.topic_name_list.index(topic_name)
                 except ValueError:
                     print(topic_name + ' is not in the topics_list')
                     return
-                out_list.append(self.topics_list[i])
+                out.append(self.topics_list[i])
         else:
             try:
                 i = self.topic_name_list.index(topic_names)
             except ValueError:
                 print(topic_names + ' is not in the topics_list')
                 return
-            out_list.append(self.topics_list[i])
+            out = self.topics_list[i]
 
-        return out_list
+        return out
 
     def plot_all_topics(self):
         topic_plots.plot_topics_list(self.topics_list)
