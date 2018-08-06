@@ -12,7 +12,7 @@ from tf.transformations import *
 import topic_plots
 from vecmsgs import _msgs
 
-class Topic:
+class Topic(object):
     def __init__(self, frequency, messages, topic, type):
         self.frequency = frequency
         self.messages = messages
@@ -27,31 +27,31 @@ class Topic:
 
 class TopicList(list):
     def plot_position_time_x(self):
-        topic_plots.plot_position_time_x([0], self, range(len(self)))
+        topic_plots.plot_position_time_x(self, range(len(self)))
 
     def plot_position_time_y(self):
-        topic_plots.plot_position_time_y([0], self, range(len(self)))
+        topic_plots.plot_position_time_y(self, range(len(self)))
 
     def plot_position_time_z(self):
-        topic_plots.plot_position_time_z([0], self, range(len(self)))
+        topic_plots.plot_position_time_z(self, range(len(self)))
 
     def plot_position_x_y(self):
-        topic_plots.plot_position_x_y([0], self, range(len(self)))
+        topic_plots.plot_position_x_y(self, range(len(self)))
 
     def plot_position(self):
-        topic_plots.plot_position([0], self, range(len(self)))
+        topic_plots.plot_position(self, range(len(self)))
 
     def plot_orientation_roll(self):
-        topic_plots.plot_orientation_roll([0], self, range(len(self)))
+        topic_plots.plot_orientation_roll(self, range(len(self)))
 
     def plot_orientation_pitch(self):
-        topic_plots.plot_orientation_pitch([0], self, range(len(self)))
+        topic_plots.plot_orientation_pitch(self, range(len(self)))
 
     def plot_orientation_yaw(self):
-        topic_plots.plot_orientation_yaw([0], self, range(len(self)))
+        topic_plots.plot_orientation_yaw(self, range(len(self)))
 
     def plot_orientation(self):
-        topic_plots.plot_orientation([0], self, range(len(self)))
+        topic_plots.plot_orientation(self, range(len(self)))
 
     def append(self, item):
         if not isinstance(item, Topic):
