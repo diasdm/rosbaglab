@@ -7,7 +7,7 @@ if __name__ == '__main__':
     # To run this example ypu should download this bag from http://download.ros.org/data/amcl/
     # and place it in the examples folder
     # Bag to be loaded
-    bag_to_load = 'texas_willow_hallway_loop_indexed.bag'
+    bag_to_load = '/home/david/ros_ws/bags/outside/2018-08-04/2.bag'
     # Load ros bag
     bag_obj = bag_tools.load_bag(bag_to_load)
     # Print some info about the ros bags
