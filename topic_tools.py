@@ -53,6 +53,18 @@ class TopicList(list):
     def plot_orientation(self):
         topic_plots.plot_orientation(self, range(len(self)))
 
+    def plot_angular_velocity_roll(self):
+        topic_plots.plot_angular_velocity_roll(self, range(len(self)))
+
+    def plot_angular_velocity_pitch(self):
+        topic_plots.plot_angular_velocity_pitch(self, range(len(self)))
+
+    def plot_angular_velocity_yaw(self):
+        topic_plots.plot_angular_velocity_yaw(self, range(len(self)))
+
+    def plot_angular_velocity(self):
+        topic_plots.plot_angular_velocity(self, range(len(self)))
+
     def append(self, item):
         if not isinstance(item, Topic):
             raise TypeError, 'item is not of type %s' % Topic.type

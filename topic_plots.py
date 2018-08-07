@@ -82,10 +82,19 @@ def plot_linear_acceleration(topic_list, topic_idx_list):
     plot_position_time_ysmth(topic_list, topic_idx_list, 'Y linear accelerarion over time', 'Y linear accelerarion [m/s^2]', ['get_linear_acceleration_y'])
     plot_position_time_ysmth(topic_list, topic_idx_list, 'Z linear accelerarion over time', 'Z linear accelerarion [m/s^2]', ['get_linear_acceleration_z'])
 
-def plot_angular_velocity(topic_list, topic_idx_list):
+def plot_angular_velocity_roll(topic_list, topic_idx_list):
     plot_position_time_ysmth(topic_list, topic_idx_list, 'X angular velocity over time', 'X angular velocity [deg/s^2]', ['get_angular_velocity_x'])
+
+def plot_angular_velocity_pitch(topic_list, topic_idx_list):
     plot_position_time_ysmth(topic_list, topic_idx_list, 'Y angular velocity over time', 'Y angular velocity [deg/s^2]', ['get_angular_velocity_y'])
+
+def plot_angular_velocity_yaw(topic_list, topic_idx_list):
     plot_position_time_ysmth(topic_list, topic_idx_list, 'Z angular velocity over time', 'Z angular velocity [deg/s^2]', ['get_angular_velocity_z'])
+
+def plot_angular_velocity(topic_list, topic_idx_list):
+    plot_angular_velocity_roll(topic_list, topic_idx_list)
+    plot_angular_velocity_pitch(topic_list, topic_idx_list)
+    plot_angular_velocity_yaw(topic_list, topic_idx_list)
 
 def plot_position(topic_list, topic_idx_list):
     plot_position_x_y(topic_list, topic_idx_list)
