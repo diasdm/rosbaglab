@@ -118,3 +118,11 @@ class VecOdometry(VecBagMsg):
         q = self.get_quat()
         return np.degrees(quaternion_tools.quat2yaw(q))
 
+    def get_angular_velocity_x(self):
+        return self.twist.get_angular_velocity_x()
+
+    def get_angular_velocity_y(self):
+        return self.twist.get_angular_velocity_y()
+
+    def get_angular_velocity_z(self):
+        return self.twist.get_angular_velocity_z()

@@ -463,6 +463,15 @@ class VecTwist(VecBagMsg):
         self.linear.write_ros_msg(msg.linear, msg_idx)
         self.angular.write_ros_msg(msg.angular, msg_idx)
 
+    def get_angular_velocity_x(self):
+        return self.angular.get_x()
+
+    def get_angular_velocity_y(self):
+        return self.angular.get_y()
+
+    def get_angular_velocity_z(self):
+        return self.angular.get_z()
+
 class VecTwistStamped(VecBagMsg):
     def __init__(self, messages, bagmsg_length = True):
         if bagmsg_length:
@@ -494,6 +503,15 @@ class VecTwistWithCovariance(VecBagMsg):
     def write_ros_msg(self, msg, msg_idx):
         self.twist.write_ros_msg(msg.twist, msg_idx)
         msg.covariance = self.covariance[:, msg_idx].tolist()
+
+    def get_angular_velocity_x(self):
+        return self.twist.get_angular_velocity_x()
+
+    def get_angular_velocity_y(self):
+        return self.twist.get_angular_velocity_y()
+
+    def get_angular_velocity_z(self):
+        return self.twist.get_angular_velocity_z()
 
 class VecTwistWithCovarianceStamped(VecBagMsg):
     def __init__(self, messages, bagmsg_length = True):
