@@ -6,7 +6,7 @@
 #THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import numpy as np
-from geometry_msgs.msg import PoseWithCovarianceStamped
+import geometry_msgs.msg
 
 from _bag_msg import *
 from _std_msgs import *
@@ -272,6 +272,16 @@ class VecPoseStamped(VecBagMsg):
         self.header.write_message(msg.header, t, count)
         self.pose.write_message(msg.pose, t, count)
 
+    def write_ros_msg(self, msg, msg_idx):
+        self.header.write_ros_msg(msg.header, msg_idx)
+        self.pose.write_ros_msg(msg.pose, msg_idx)
+
+    def get_ros_msg(self, msg_idx):
+        msg = geometry_msgs.msg.PoseStamped()
+        self.write_ros_msg(msg, msg_idx)
+        t = VecBagMsg.get_ros_msg(self, msg_idx)
+        return [msg, t]
+
     def get_position_x(self):
         return self.pose.get_position_x()
 
@@ -372,7 +382,7 @@ class VecPoseWithCovarianceStamped(VecBagMsg):
         self.pose.write_ros_msg(msg.pose, msg_idx)
 
     def get_ros_msg(self, msg_idx):
-        msg = PoseWithCovarianceStamped()
+        msg = geometry_msgs.msg.PoseWithCovarianceStamped()
         self.write_ros_msg(msg, msg_idx)
         t = VecBagMsg.get_ros_msg(self, msg_idx)
         return [msg, t]

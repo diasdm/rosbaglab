@@ -12,6 +12,8 @@ import _geometry_msgs
 import _nav_msgs
 import _sensor_msgs
 import _custom_msgs
+import _novatel_msgs
+import _nmea_msgs
 
 def get_message_obj(type, messages):
         return {
@@ -81,4 +83,8 @@ def get_message_obj(type, messages):
             'sensor_msgs/TimeReference': _sensor_msgs.VecTimeReference(messages),
             # _custom_msgs
             'some_msgs/CustomMsgs': _custom_msgs.VecCustomMsg(messages),
+            # _novatel_msgs
+            'novatel_msgs/BESTPOS': _novatel_msgs.VecBESTPOS(messages),
+            # _nmea_msgs
+            'nmea_msgs/Gpgga': _nmea_msgs.VecGpgga(messages),
             }.get(type, None)
